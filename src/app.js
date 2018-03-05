@@ -13,6 +13,28 @@ class IndecisionApp extends React.Component {
     this.handleDeleteOption = this.handleDeleteOption.bind(this)
   }
 
+  componentDidMount() {
+    try {
+      const json = localStorage.getItem('options')
+      const options = JSON.parse(json)
+
+      if (options) {
+        this.setState(() => ({ options }))
+      }
+    } catch (e) {
+      // Do nothing at all
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.options.length !== this.state.options.length) {
+      const json = JSON.stringify(this.state.options)
+      localStorage.setItem('options', json)
+    }
+  }
+
+  componentWillUnmount() {}
+
   handleDeleteOptions() {
     this.setState(() => ({
       options: []
@@ -109,6 +131,7 @@ const Options = ({
     >
       Remove All
     </button>
+    {options.length === 0 && <p>Please add an option to get started!</p>}
     {options.map((option, idx) =>
       <Option
         key={`option-${idx}`}
@@ -152,7 +175,9 @@ class AddOption extends React.Component {
 
     this.setState(() => ({ error }))
 
-    e.target.elements.option.value = ''
+    if (!error) {
+      e.target.elements.option.value = ''
+    }
   }
 
   render() {
@@ -169,6 +194,6 @@ class AddOption extends React.Component {
 }
 
 ReactDOM.render(
-  <IndecisionApp options={['React', 'Redux']} />,
+  <IndecisionApp />,
   document.getElementById('app')
 )
