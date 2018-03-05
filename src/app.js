@@ -10,11 +10,18 @@ class IndecisionApp extends React.Component {
     this.handleDeleteOptions = this.handleDeleteOptions.bind(this)
     this.handlePick = this.handlePick.bind(this)
     this.handleAddOption = this.handleAddOption.bind(this)
+    this.handleDeleteOption = this.handleDeleteOption.bind(this)
   }
 
   handleDeleteOptions() {
     this.setState(() => ({
       options: []
+    }))
+  }
+
+  handleDeleteOption(optionToRemove) {
+    this.setState((prevState) => ({
+      options: prevState.options.filter((option) => option !== optionToRemove)
     }))
   }
 
@@ -49,6 +56,7 @@ class IndecisionApp extends React.Component {
         <Options
           options={this.state.options}
           handleDeleteOptions={this.handleDeleteOptions}
+          handleDeleteOption={this.handleDeleteOption}
         />
         <AddOption
           handleAddOption={this.handleAddOption}
@@ -92,7 +100,8 @@ const Action = ({
 
 const Options = ({
   options,
-  handleDeleteOptions
+  handleDeleteOptions,
+  handleDeleteOption
 }) => (
   <div>
     <button
@@ -104,15 +113,24 @@ const Options = ({
       <Option
         key={`option-${idx}`}
         optionText={option}
+        handleDeleteOption={handleDeleteOption}
       />
     )}
   </div>
 )
 
 const Option = ({
-  optionText
+  optionText,
+  handleDeleteOption
 }) => (
-  <p>{optionText}</p>
+  <p>
+    {optionText}
+    <button
+      onClick={() => handleDeleteOption(optionText)}
+    >
+      remove
+    </button>
+  </p>
 )
 
 class AddOption extends React.Component {
