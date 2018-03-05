@@ -19,7 +19,7 @@ var IndecisionApp = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (IndecisionApp.__proto__ || Object.getPrototypeOf(IndecisionApp)).call(this, props));
 
     _this.state = {
-      options: []
+      options: _this.props.options
     };
 
     _this.handleDeleteOptions = _this.handleDeleteOptions.bind(_this);
@@ -62,13 +62,12 @@ var IndecisionApp = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var title = "Indecision";
       var subtitle = "Put your life in the hands of a computer";
 
       return React.createElement(
         'div',
         null,
-        React.createElement(Header, { title: title, subtitle: subtitle }),
+        React.createElement(Header, { subtitle: subtitle }),
         React.createElement(Action, {
           hasOptions: this.state.options.length > 0,
           handlePick: this.handlePick
@@ -87,6 +86,10 @@ var IndecisionApp = function (_React$Component) {
   return IndecisionApp;
 }(React.Component);
 
+IndecisionApp.defaultProps = {
+  options: []
+};
+
 var Header = function Header(_ref) {
   var title = _ref.title,
       subtitle = _ref.subtitle;
@@ -98,12 +101,16 @@ var Header = function Header(_ref) {
       null,
       title
     ),
-    React.createElement(
+    subtitle && React.createElement(
       'h2',
       null,
       subtitle
     )
   );
+};
+
+Header.defaultProps = {
+  title: 'Indecision'
 };
 
 var Action = function Action(_ref2) {
@@ -212,4 +219,4 @@ var AddOption = function (_React$Component2) {
   return AddOption;
 }(React.Component);
 
-ReactDOM.render(React.createElement(IndecisionApp, null), document.getElementById('app'));
+ReactDOM.render(React.createElement(IndecisionApp, { options: ['React', 'Redux'] }), document.getElementById('app'));
