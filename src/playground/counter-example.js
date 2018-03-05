@@ -4,7 +4,7 @@ class Counter extends React.Component {
     super(props)
 
     this.state = {
-      count: this.props.count
+      count: props.count
     }
 
     this.handlePlusOne = this.handlePlusOne.bind(this)
