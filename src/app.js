@@ -4,7 +4,7 @@ class IndecisionApp extends React.Component {
     super(props)
 
     this.state = {
-      options: ['Thing one', 'Thing two', 'Thing three']
+      options: []
     }
 
     this.handleDeleteOptions = this.handleDeleteOptions.bind(this)
@@ -59,62 +59,54 @@ class IndecisionApp extends React.Component {
   }
 }
 
-class Header extends React.Component {
-  render() {
-    const { title, subtitle } = this.props
+const Header = ({
+  title,
+  subtitle
+}) => (
+  <div>
+    <h1>{title}</h1>
+    <h2>{subtitle}</h2>
+  </div>
+)
 
-    return (
-      <div>
-        <h1>{title}</h1>
-        <h2>{subtitle}</h2>
-      </div>
-    )
-  }
-}
+const Action = ({
+  hasOptions,
+  handlePick
+}) => (
+  <div>
+    <button
+      onClick={handlePick}
+      disabled={!hasOptions}
+    >
+      What should I do?
+    </button>
+  </div>
+)
 
-class Action extends React.Component {
-  render() {
-    return (
-      <div>
-        <button
-          onClick={this.props.handlePick}
-          disabled={!this.props.hasOptions}
-        >
-          What should I do?
-        </button>
-      </div>
-    )
-  }
-}
+const Options = ({
+  options,
+  handleDeleteOptions
+}) => (
+  <div>
+    <button
+      onClick={handleDeleteOptions}
+    >
+      Remove All
+    </button>
+    {options.map((option, idx) =>
+      <Option
+        key={`option-${idx}`}
+        optionText={option}
+      />
+    )}
+  </div>
+)
 
-class Options extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
-  render() {
-    const { options } = this.props
-
-    return (
-      <div>
-        <button onClick={this.props.handleDeleteOptions}>Remove All</button>
-        {options.map((option, idx) =>
-          <Option key={`option-${idx}`} optionText={option} />
-        )}
-      </div>
-    )
-  }
-}
-
-class Option extends React.Component {
-  render() {
-    const { optionText } = this.props
-
-    return (
-      <p>{optionText}</p>
-    )
-  }
-}
+const Option = ({
+  optionText
+}) => (
+  <p>{optionText}</p>
+)
 
 class AddOption extends React.Component {
   constructor(props) {
