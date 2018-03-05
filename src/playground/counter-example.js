@@ -4,7 +4,7 @@ class Counter extends React.Component {
     super(props)
 
     this.state = {
-      count: 0
+      count: this.props.count
     }
 
     this.handlePlusOne = this.handlePlusOne.bind(this)
@@ -42,7 +42,11 @@ class Counter extends React.Component {
   }
 }
 
+Counter.defaultProps = {
+  count: 0
+}
+
 ReactDOM.render(
-  <Counter />,
+  <Counter count={10} />,
   document.getElementById('app')
 )
