@@ -1,7 +1,7 @@
 // Big Button
 .big-button {
   width: 100%;
-  margin-bottom: $xl-size;
+  margin-bottom: $m-size;
   padding: 2.4rem;
   background-color: $purple;
   border: none;
@@ -30,4 +30,10 @@
   border: none;
   color: $off-white;
   padding: 0;
+}
+
+@media (min-width: $desktop-breakpoint) {
+  .big-button {
+    margin-bottom: $xl-size;
+  }
 }
