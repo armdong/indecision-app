@@ -8,6 +8,7 @@ const Options = ({
 }) => (
   <div>
     <button
+      className="button button--link"
       onClick={handleDeleteOptions}
     >
       Remove All

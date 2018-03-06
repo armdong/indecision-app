@@ -7,6 +7,7 @@ const Option = ({
   <p>
     {optionText}
     <button
+      className="button button--link"
       onClick={() => handleDeleteOption(optionText)}
     >
       remove

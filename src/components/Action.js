@@ -6,6 +6,7 @@ const Action = ({
 }) => (
   <div>
     <button
+      className="big-button"
       onClick={handlePick}
       disabled={!hasOptions}
     >
