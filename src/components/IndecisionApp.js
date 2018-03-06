@@ -72,25 +72,33 @@ class IndecisionApp extends React.Component {
 
   render() {
     const subtitle = "Put your life in the hands of a computer"
+    const { options, selectedOption } = this.state
+    const {
+      handlePick,
+      handleDeleteOption,
+      handleDeleteOptions,
+      handleAddOption,
+      handleClearSelectedOption
+    } = this
 
     return (
       <div>
         <Header subtitle={subtitle} />
         <Action
-          hasOptions={this.state.options.length > 0}
-          handlePick={this.handlePick}
+          hasOptions={options.length > 0}
+          handlePick={handlePick}
         />
         <Options
-          options={this.state.options}
-          handleDeleteOptions={this.handleDeleteOptions}
-          handleDeleteOption={this.handleDeleteOption}
+          options={options}
+          handleDeleteOptions={handleDeleteOptions}
+          handleDeleteOption={handleDeleteOption}
         />
         <AddOption
-          handleAddOption={this.handleAddOption}
+          handleAddOption={handleAddOption}
         />
         <OptionModal
-          selectedOption={this.state.selectedOption}
-          handleClearSelectedOption={this.handleClearSelectedOption}
+          selectedOption={selectedOption}
+          handleClearSelectedOption={handleClearSelectedOption}
         />
       </div>
     )
